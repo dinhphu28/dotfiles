@@ -1,3 +1,4 @@
-# NeoVim Config
+# 💤 LazyVim
 
-1. Copy this folder to ~/.config/nvim (for mac)
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
