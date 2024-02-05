@@ -1,0 +1,7 @@
+Host *
+	IdentityAgent ~/.1password/agent.sock
+
+# For CA PAM
+Host 127.0.0.214
+  PasswordAuthentication yes
+  PubkeyAuthentication no

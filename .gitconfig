@@ -1,0 +1,12 @@
+[user]
+  signingkey = BE9829BB574722BA
+  name = Dinh Phu Nguyen
+  email = phund30@fpt.com
+[init]
+  defaultBranch = main
+[commit]
+	gpgsign = true
+
+[core]
+  editor = nvim
+
