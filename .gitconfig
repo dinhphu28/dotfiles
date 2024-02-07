@@ -1,11 +1,27 @@
 [user]
-  signingkey = BE9829BB574722BA
+  signingkey = 1FB5A566CDFAA894
   name = Dinh Phu Nguyen
   email = phund30@fpt.com
+
+[includeIf "gitdir:**/github.com/"]
+  path = ~/personal/.gitconfig
+[includeIf "gitdir:**/git.cads.live/"]
+  path = ~/work/.gitconfig
+
+[includeIf "hasconfig:remote.*.url:git@github.com**/**"]
+  path = ~/personal/.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = ~/personal/.gitconfig
+
+[includeIf "hasconfig:remote.*.url:git@git.cads.live**/**"]
+  path = ~/work/.gitconfig
+[includeIf "hasconfig:remote.*.url:https://git.cads.live/**"]
+  path = ~/work/.gitconfig
+
 [init]
   defaultBranch = main
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [core]
   editor = nvim
