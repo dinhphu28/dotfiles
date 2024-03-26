@@ -29,7 +29,9 @@ To run packages installed by brew with root privileges, (sudo). Add below to `De
   brew install metals
   ```
 
-  
+- Bluetooth:
+  - For Fedora (or Ubuntu) using GNOME, auto connect paired device (my bluetooth keyboard) works fine.
+  - For openSUSE Tumbleweed, it just has option turn on after login, so I need to append line `bluetoothctl power on` to `/etc/udev/rules.d/70-persistent-net.rules` then reboot system, it works.
 
 - a terminal that support true color and undercurl:
   - [kitty](https://github.com/kovidgoyal/kitty) ***(Linux & Macos)***
