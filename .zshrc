@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting docker dnf)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker dotenv brew sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,6 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -110,12 +112,11 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
