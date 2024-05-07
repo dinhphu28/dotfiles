@@ -103,6 +103,9 @@ return {
         tmux = true,
         kitty = { enabled = false, font = "+2" },
       },
+      window = {
+        width = 0.8
+      }
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
