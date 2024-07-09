@@ -10,3 +10,7 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Disable auto-format
 vim.g.autoformat = false
+
+-- Spell checking
+vim.opt.spelllang = "en_us"
+-- vim.opt.spell = true
