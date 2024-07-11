@@ -6,7 +6,7 @@ return {
       table.insert(opts.routes, {
         filter = {
           event = "notify",
-          find = "No information avaiable",
+          find = "No information available",
         },
         opts = { skip = true },
       })
@@ -21,7 +21,17 @@ return {
           focused = false
         end,
       })
+
       table.insert(opts.routes, 1, {
+        filter = {
+          event = "lsp",
+          kind = "progress",
+        },
+        view = "mini",
+        opts = { stop = true },
+      })
+
+      table.insert(opts.routes, 2, {
         filter = {
           cond = function()
             return not focused
@@ -104,8 +114,8 @@ return {
         kitty = { enabled = false, font = "+2" },
       },
       window = {
-        width = 0.8
-      }
+        width = 0.8,
+      },
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },

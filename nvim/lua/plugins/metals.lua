@@ -86,6 +86,16 @@ return {
       group = nvim_metals_group,
     })
 
+    -- api.nvim_create_autocmd("LspProgress", {
+    --   pattern = "LspProgressUpdate",
+    --   callback = function()
+    --     pcall(vim.notify, "YEAH! Compiling ...", vim.log.levels.INFO, {
+    --       timeout = 1000,
+    --     })
+    --   end,
+    --   group = nvim_metals_group,
+    -- })
+
     -- map("n", "<leader>mc", require("telescope").extensions.metals.commands)
     -- map("n", "<leader>ws", require("metals").hover_worksheet)
   end,
