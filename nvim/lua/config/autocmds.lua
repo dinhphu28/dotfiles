@@ -16,3 +16,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo.conceallevel = 0
   end,
 })
+
+-- Set filetype for editing command in zsh (edit command with ^X^E)
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "zsh*",
+  command = "set filetype=sh",
+})
