@@ -1,11 +1,14 @@
-import = ["~/.config/alacritty/keybindings.toml"]
+import = [
+  "~/.config/alacritty/keybindings.toml",
+  "~/.config/alacritty/themes/themes/gruvbox_light.toml"
+]
 
 [font]
   normal = { family = "MesloLGS NF", style = "Regular" }
   size = 9.0
 
-[colors.primary]
-  background = "#000000"
+# [colors.primary]
+#   background = "#000000"
 
 [cursor.style]
   shape = "Beam"
