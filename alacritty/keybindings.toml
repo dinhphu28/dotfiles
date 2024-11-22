@@ -1,0 +1,8 @@
+[keyboard]
+  bindings = [
+    { key = "F11", mods = "Shift", action = "ToggleFullscreen" },
+    { key = "C", mods = "Alt", action = "Copy" },
+    { key = "V", mods = "Alt", action = "Paste" },
+    { key = "T", mods = "Alt", action = "CreateNewWindow" },
+  ]
+
