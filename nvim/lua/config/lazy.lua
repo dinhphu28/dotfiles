@@ -31,6 +31,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.clojure" },
     { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
     -- import/override with your plugins
     { import = "plugins" },
