@@ -63,15 +63,6 @@ return {
     end,
   },
 
-  -- animations
-  {
-    "echasnovski/mini.animate",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      opts.scroll = { enabled = false }
-    end,
-  },
-
   -- filename
   {
     "b0o/incline.nvim",
