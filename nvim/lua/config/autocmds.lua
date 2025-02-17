@@ -17,6 +17,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Set indentation for java files (4 spaces)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+  end,
+})
+
 -- Set filetype for editing command in zsh (edit command with ^X^E)
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "zsh*",
