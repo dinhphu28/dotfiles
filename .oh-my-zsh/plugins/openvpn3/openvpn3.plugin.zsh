@@ -1,0 +1,110 @@
+#  OpenVPN 3 Linux client -- Next generation OpenVPN client
+#
+#  SPDX-License-Identifier: AGPL-3.0-only
+#
+#  Copyright (C) 2018 - 2023  OpenVPN Inc <sales@openvpn.net>
+#  Copyright (C) 2018 - 2023  David Sommerseth <davids@openvpn.net>
+#
+
+##
+# @file  bash_completion_openvpn3
+#
+# @brief  A bash_completion helper script for the openvpn3 command line
+#         programs.  This script makes use of the shell-completion command
+#         provided by openvpn3 or openvpn3-admin, which provides up-to-date
+#         insight on the various commands, options and arguments.
+#
+#         Also works with zsh after loading bascomphinit
+#         (autoload -U +X bashcompinit && bashcompinit)
+
+_openvpn3_generic_completion()
+{
+    local cmd first cur prev opts base
+    COMPREPLY=()
+    cmd="$1"
+    first=${COMP_WORDS[1]}
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    o3cmds=""
+    if [ "${cur:0:2}" != "--" -a "${cur:0:1}" != "-" ]; then
+       o3cmds="$($cmd shell-completion --list-commands)"
+    fi
+
+    selopts=""
+    echo "$o3cmds" | tr ' ' '\n' | grep -v "version" | grep -qE "^$cur$"
+    if [ $? -eq 0 ]; then
+       # All commands except 'version' takes at least one option.
+       # If the requested command is not "version", attach the '--' now
+       COMPREPLY=( "$first --")
+    elif [ $COMP_CWORD -eq 1 ]; then
+        # The first argument is always an openvpn3 command
+        # and it never starts with - or --
+        COMPREPLY=( $( compgen -W "$o3cmds" $cur ) )
+    elif [ $COMP_CWORD -gt 1 ]; then
+        if [ "${cur:0:2}" == "--" -o "${cur:0:1}" == "-" ]; then
+            # If the argument starts with '-' or '--' provide list of options
+            comp_op="-W"
+            selopts="$($cmd shell-completion --list-options $first)"
+        else
+            # Some options can get some extra help from bash
+            case "${prev}" in
+            "--config")  # Takes configuration profile names and file names
+                # Prepare a simple filter, providing partial matching
+                filter="cat" # by default everything passes
+                if [ -n "$cur" ]; then
+                    filter="grep -E ^$cur"
+                fi
+                comp_op="-W"
+                if [ "config-import" = "${first}" -o "session-start" = "${first}" ]; then
+                    # Only list files which most likely are OpenVPN configuration files
+                    selopts="$(grep -sm1 -E '(client|remote |port |lport |rport |key |cert |ca )' ${cur}*.conf ${cur}*.ovpn | cut -d: -f1 | $filter | tr '\n' ' ')"
+
+                    # Add directories too, but ignore those starting with '.{some-alpha-num-letters}'
+                    selopts="$(compgen -d -- $cur | sed 's#$#/#' | grep -vE '^\.\w+' | tr '\n' ' ') $selopts"
+                fi
+
+                # In addition, extend with all pre-loaded configurations
+                selopts="$($cmd shell-completion --list-options $first --arg-help $prev) $selopts"
+                ;;
+
+            "--grant"|"--revoke") # Takes username (or UID, which we don't tackle here)
+                comp_op="-u"
+                selopts=""
+                ;;
+
+            *)
+                # Otherwise try to fill out with possible argument values for the
+                # provided option
+                comp_op="-W"
+                arghelp="$prev"
+                if [ "$cur" == "=" ]; then
+                        arghelp="$prev$cur"
+                fi
+                if [ -n "$first" -a -z "${cur}" -a -z "${selopts}" ]; then
+                   selopts="--"
+                else
+                   selopts="$($cmd shell-completion --list-options $first --arg-help $arghelp)"
+                fi
+                ;;
+            esac
+        fi
+        if [ "$cur" == "=" ]; then
+            cur=""
+        fi
+        COMPREPLY=( $( compgen ${comp_op} "${selopts}" -- $cur ) )
+    fi
+}
+
+_openvpn3_completion()
+{
+    _openvpn3_generic_completion openvpn3
+}
+complete -F _openvpn3_completion -o nospace openvpn3
+
+
+_openvpn3admin_completion()
+{
+    _openvpn3_generic_completion openvpn3-admin
+}
+complete -F _openvpn3admin_completion -o nospace openvpn3-admin
