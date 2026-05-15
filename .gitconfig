@@ -1,7 +1,7 @@
 [user]
   signingkey = 1FB5A566CDFAA894
-  name = Dinh Phu Nguyen
-  email = phund30@fpt.com
+	name = Dinh Phu Nguyen
+	email = dinhphu28@dinhphu28.com
 
 [includeIf "gitdir:**/github.com/"]
   path = ~/personal/.gitconfig
@@ -19,10 +19,18 @@
   path = ~/work/.gitconfig
 
 [init]
-  defaultBranch = main
+	defaultBranch = main
+;  templateDir = /home/dinhphu28/.git-template
 [commit]
-  gpgsign = true
+	gpgSign = true
 
 [core]
   editor = nvim
 
+[tag]
+	forceSignAnnotated = false
+[safe]
+	directory = /srv/git/sample1
+
+[credential]
+	helper = op
