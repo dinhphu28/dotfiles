@@ -1,16 +1,30 @@
+-- ~/.config/nvim/lua/plugins/java.lua
+
 return {
   {
-    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-jdtls",
     opts = {
-      servers = {
-        jdtls = {
-          root_dir = require("lspconfig.util").root_pattern(
-            "settings.gradle",
-            "settings.gradle.kts",
-            "build.gradle",
-            "build.gradle.kts",
-            ".git"
-          ),
+      jdtls = {
+        settings = {
+          java = {
+            compile = {
+              nullAnalysis = {
+                mode = "automatic",
+                nullable = {
+                  "org.jspecify.annotations.Nullable",
+                },
+                nonnull = {
+                  "org.jspecify.annotations.NonNull",
+                },
+                nonnullbydefault = {
+                  "org.jspecify.annotations.NullMarked",
+                },
+                nullunmarked = {
+                  "org.jspecify.annotations.NullUnmarked",
+                },
+              },
+            },
+          },
         },
       },
     },

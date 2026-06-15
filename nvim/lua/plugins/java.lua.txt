@@ -1,0 +1,31 @@
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        jdtls = {
+          root_dir = require("lspconfig.util").root_pattern(
+            "settings.gradle",
+            "settings.gradle.kts",
+            "build.gradle",
+            "build.gradle.kts",
+            ".git"
+          ),
+
+          -- Add your custom JSpecify and null analysis configuration here
+          settings = {
+            java = {
+              compile = {
+                nullAnalysis = {
+                  mode = "automatic",
+                  nullable = { "org.jspecify.annotations.Nullable" },
+                  nonnull = { "org.jspecify.annotations.NonNull" },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
